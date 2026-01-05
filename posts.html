@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My App</title>
+    <style>
+        .navbar {
+            background: #f8f9fa;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .navbar a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <div class="navbar">
+        <a href="/">MY APP</a>
+
+        {% if user.is_authenticated %}
+            <span>Hello, {{ user.username }}</span>
+            <a href="{% url 'logout_view' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}">Login</a>
+            <a href="{% url 'register_view' %}">Sign Up</a>
+        {% endif %}
+    </div>
+
+    <div style="padding: 20px;">
+        <h1>All Posts</h1>
+
+        {% for post in posts %}
+        <div class="post">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <small>Author: {{ post.user.username }} | Date: {{ post.created }}</small>
+        </div>
+        {% empty %}
+        <p>No posts yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

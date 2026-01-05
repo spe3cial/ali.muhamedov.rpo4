@@ -1,0 +1,21 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My App</title>
+</head>
+<body>
+    <nav>
+        <a href="/">MY APP</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout_view' %}">Logout</a>
+        {% else %}
+            <a href="{% url 'login_view' %}">Login</a>
+            <a href="{% url 'register_view' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
